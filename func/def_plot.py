@@ -17,20 +17,20 @@ def plot_data(components, trace, trace_time_vector,  specgram_time_vector, specg
         ## BHZ
     ax1 = plt.subplot2grid(gridsize, (0, 0), colspan=7, rowspan=2)
     ax2 = plt.subplot2grid(gridsize, (2, 0), colspan=7, rowspan=8, sharex=ax1)
-    ax3 = plt.subplot2grid(gridsize, (10, 0), colspan=7, rowspan=3, sharex=ax1)
+    ax3 = plt.subplot2grid(gridsize, (10, 0), colspan=7, rowspan=3)
         
         
     ## BH1
 
     ax4 = plt.subplot2grid(gridsize, (14, 0), colspan=7, rowspan=2, sharey=ax1)
     ax5 = plt.subplot2grid(gridsize, (16, 0), colspan=7, rowspan=8, sharex=ax1)
-    ax6 = plt.subplot2grid(gridsize, (24, 0), colspan=7, rowspan=3, sharex=ax1, sharey=ax3)
+    ax6 = plt.subplot2grid(gridsize, (24, 0), colspan=7, rowspan=3, sharex=ax3, sharey=ax3)
         
     ## BH2
 
     ax7 = plt.subplot2grid(gridsize, (28, 0), colspan=7, rowspan=2, sharey=ax1)
     ax8 = plt.subplot2grid(gridsize, (30, 0), colspan=7, rowspan=8, sharex=ax1)
-    ax9 = plt.subplot2grid(gridsize, (38, 0), colspan=7, rowspan=3, sharex=ax1, sharey=ax3)
+    ax9 = plt.subplot2grid(gridsize, (38, 0), colspan=7, rowspan=3, sharex=ax3, sharey=ax3)
         
 
 
@@ -59,7 +59,7 @@ def plot_data(components, trace, trace_time_vector,  specgram_time_vector, specg
     ax3.plot(specgram_time_vector/3600,10*np.log10(amplitude_values[0,:]),',', color='maroon')
     ax3.axhline(y=-100, color='red', linewidth=.6, label='-100 dB')
     mean0 = str(10*np.log10(np.nanmean(amplitude_values[0,:])))
-    ax3.axhline(y=10*np.log10(np.nanmean(amplitude_values[0,:])), color='lime', lw=.3, label=mean0[0:3])
+    ax3.axhline(y=10*np.log10(np.nanmean(amplitude_values[0,:])), color='lime', lw=.3, label=mean0[0:4])
     ax3.set_ylabel('Amplitude [dB]')
     ax3.set_ylim(-130,-60)
     ax3.set_xlim(0, 24)
@@ -89,7 +89,7 @@ def plot_data(components, trace, trace_time_vector,  specgram_time_vector, specg
     #a3.axhline(y=10*np.log10(threshold), color='red', linewidth=.6, label=10*np.log10(threshold))
     ax6.axhline(y=-100, color='red', linewidth=.6, label='-100 dB')
     mean0 = str(10*np.log10(np.nanmean(amplitude_values[1,:])))
-    ax6.axhline(y=10*np.log10(np.nanmean(amplitude_values[1,:])), color='lime', lw=.3, label=mean0[0:3])
+    ax6.axhline(y=10*np.log10(np.nanmean(amplitude_values[1,:])), color='lime', lw=.3, label=mean0[0:4])
     ax6.set_ylabel('Amplitude [dB]')
     ax6.set_xlim(0, 24)
     ax6.legend(bbox_to_anchor=(1.01, .6), loc=2, borderaxespad=0.)
@@ -116,7 +116,7 @@ def plot_data(components, trace, trace_time_vector,  specgram_time_vector, specg
     ax9.axhline(y=-100, color='red', linewidth=.6, label='-100 dB')
     #a3.axhline(y=10*np.log10(threshold), color='red', linewidth=.6, label=10*np.log10(threshold))
     mean0 = str(10*np.log10(np.nanmean(amplitude_values[2,:])))
-    ax9.axhline(y=10*np.log10(np.nanmean(amplitude_values[2,:])), color='lime', lw=.3, label=mean0[0:3])
+    ax9.axhline(y=10*np.log10(np.nanmean(amplitude_values[2,:])), color='lime', lw=.3, label=mean0[0:4])
     ax9.set_ylabel('Amplitude [dB]')
     ax9.set_xlim(0, 24)
     ax9.legend(bbox_to_anchor=(1.01, .6), loc=2, borderaxespad=0.)
