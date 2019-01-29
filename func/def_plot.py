@@ -8,32 +8,36 @@ import matplotlib.pyplot as plt
 def plot_data(components, trace, trace_time_vector,  specgram_time_vector, specgram_freq_vector,  specgram, freq_values, amplitude_values, path, station, year, day):
     #i = 0
     #while i < np.shape(specgram)[0]:
-    gridsize = (41, 9)
+    gridsize = (55, 9)
     fig = plt.figure(figsize=(32, 22))
     fig.subplots_adjust(hspace=0, wspace=0)
         #fig.suptitle(station + '.' + 'starttime: ' +  first_date)
         #fig.suptitle(station + '.' + component + '_' + 'starttime: ' +  str(trace[0].stats.starttime)[0:19])
 
-        ## BHZ
+    ## v_component
     ax1 = plt.subplot2grid(gridsize, (0, 0), colspan=7, rowspan=2)
     ax2 = plt.subplot2grid(gridsize, (2, 0), colspan=7, rowspan=8, sharex=ax1)
     ax3 = plt.subplot2grid(gridsize, (10, 0), colspan=7, rowspan=3)
         
         
-    ## BH1
+    ## h_component1
 
     ax4 = plt.subplot2grid(gridsize, (14, 0), colspan=7, rowspan=2, sharey=ax1)
     ax5 = plt.subplot2grid(gridsize, (16, 0), colspan=7, rowspan=8, sharex=ax1)
     ax6 = plt.subplot2grid(gridsize, (24, 0), colspan=7, rowspan=3, sharex=ax3, sharey=ax3)
         
-    ## BH2
+    ## h_component2
 
     ax7 = plt.subplot2grid(gridsize, (28, 0), colspan=7, rowspan=2, sharey=ax1)
     ax8 = plt.subplot2grid(gridsize, (30, 0), colspan=7, rowspan=8, sharex=ax1)
     ax9 = plt.subplot2grid(gridsize, (38, 0), colspan=7, rowspan=3, sharex=ax3, sharey=ax3)
         
 
+    ## hydrophone
 
+    ax10 = plt.subplot2grid(gridsize, (42, 0), colspan=7, rowspan=2)
+    ax11 = plt.subplot2grid(gridsize, (44, 0), colspan=7, rowspan=8, sharex=ax1)
+    ax12 = plt.subplot2grid(gridsize, (52, 0), colspan=7, rowspan=3, sharex=ax3, sharey=ax3)
 
 
     ax1.plot(trace_time_vector,trace[0,:], color='maroon')
@@ -121,7 +125,33 @@ def plot_data(components, trace, trace_time_vector,  specgram_time_vector, specg
     ax9.set_xlim(0, 24)
     ax9.legend(bbox_to_anchor=(1.01, .6), loc=2, borderaxespad=0.)
 
+    ax10.plot(trace_time_vector,trace[3,:], color='maroon')
+    ax10.set_xlim(0,24)
+    ax10.set_ylim(0.5,0.5)
+    ax10.title.set_text(components[3])
+    ax10.set_ylabel('Acceleration')
+    ax10.set_xticks([])
 
+
+    ax11.pcolormesh(specgram_time_vector/3600, specgram_freq_vector, 10*np.log10(specgram[3,:,:]))
+    ax11.plot(specgram_time_vector/3600,freq_values[3,:],',', color='dodgerblue')
+    #ax1.plot(time_stack/3600/24,freq_values_all_appended[0,:],',', color='dodgerblue')
+    #ax2.set_ylim(0,5.5)
+    ax11.set_ylabel('Frequency [Hz]')
+    #a2.set_xlim(0,24)
+    #ax2.title.set_text(components[0])
+    ax11.set_xticks([]) 
+
+    #ax3.plot(specgram_time_vector/3600, 10*np.log10(amplitude_values_all[0,:]),',', color='red')
+    #ax3.plot(time_stack/3600/24,10*np.log10(amplitude_values_all_appended[0,:]),',', color='red')
+    ax12.plot(specgram_time_vector/3600,10*np.log10(amplitude_values[3,:]),',', color='maroon')
+    ax12.axhline(y=-100, color='red', linewidth=.6, label='-100 dB')
+    #a3.axhline(y=10*np.log10(threshold), color='red', linewidth=.6, label=10*np.log10(threshold))
+    mean0 = str(10*np.log10(np.nanmean(amplitude_values[3,:])))
+    ax12.axhline(y=10*np.log10(np.nanmean(amplitude_values[3,:])), color='lime', lw=.3, label=mean0[0:4])
+    ax12.set_ylabel('Amplitude [dB]')
+    ax12.set_xlim(0, 24)
+    ax12.legend(bbox_to_anchor=(1.01, .6), loc=2, borderaxespad=0.)
 
         #i += 1
     plt.suptitle((station+'.'+str(year)+' Day Nr: '+str(day)), x=.45, y=.91)    
