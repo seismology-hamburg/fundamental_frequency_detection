@@ -103,7 +103,7 @@ def hps_algo(input_data, freq_vector, nr_downsamp,min_freq=0, max_freq=0.5):
 
 
 def pitch_detection(trace,nfft,threshold_HSI,nr_downsamp_HPS,add_time=1):
-'''Pitch deteciton for python after the idea of Roman, D. C. (2017), Automated detection and characterization of harmonic tremor in continuous seismic data, Geophys. Res. Lett., 44, 6065–6073 doi:10.1002/2017GL073715
+    '''Pitch deteciton for python after the idea of Roman, D. C. (2017), Automated detection and characterization of harmonic tremor in continuous seismic data, Geophys. Res. Lett., 44, 6065–6073 doi:10.1002/2017GL073715
     
 
     
